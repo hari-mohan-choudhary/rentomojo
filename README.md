@@ -1,5 +1,5 @@
 # Medium-Crawl
-Crawl popular blogging website [Medium]https://medium.com​ and find all possible hyperlinks present within [Medium]https://medium.com​ website and generate a CSV output.
+Crawl popular blogging website https://medium.com​ and find all possible hyperlinks present within https://medium.com​ website and generate a CSV output.
 
 ## How to run the Crawler?
 
