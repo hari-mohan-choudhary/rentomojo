@@ -23,13 +23,13 @@ class Crawler {
   }
 
     crawl(url) {
-    return this.crawl(url)
-      .then(() => this.crawlChunkWise())
+    return this._crawl(url)
+      .then(() => this._crawlChunkWise())
       .then(() => ({ foundUrls: this.foundUrls, crawledUrls: this.crawledUrls }));
   }
 
   
-  crawl(url) {
+  _crawl(url) {
     const isMediumLink = url.startsWith('https://medium.com');
     if (this.crawledUrls[url] || this.crawledSize >= this.maxPages || !isMediumLink) {
       return P.resolve([]);
@@ -44,11 +44,11 @@ class Crawler {
       .then(() => debug(`finished crawling : ${url}`));
   }
 
-  crawlChunkWise() {
+  _crawlChunkWise() {
     const chunks = array.chunk(this.foundUrls, this.requestThrottle);
     if (this.chunkIndex >= chunks.length) return P.resolve();
-    return P.map(chunks[this.chunkIndex++], item => this.crawl(item.link))
-      .then(() => this.crawlChunkWise());
+    return P.map(chunks[this.chunkIndex++], item => this._crawl(item.link))
+      .then(() => this._crawlChunkWise());
   }
 
 }
